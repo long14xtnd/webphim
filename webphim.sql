@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2022 at 01:06 PM
+-- Generation Time: Apr 28, 2022 at 01:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -31,16 +31,21 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `title`, `description`, `status`) VALUES
-(1, 'batman', 'như lol', 1),
-(2, 'sonic', 'cũng bt ko hay lắm', 1);
+INSERT INTO `categories` (`id`, `title`, `description`, `status`, `slug`) VALUES
+(3, 'hải long sinh viên năm cuối', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-cuoi'),
+(4, 'bây giờ có phim gì hay ko bạn', 'nhiều bạn ơi', 0, ''),
+(7, 'hải long sinh viên năm 4', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-4'),
+(8, 'hải long sinh viên năm 4', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-4'),
+(9, 'hải long sinh viên năm 3', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-3'),
+(10, 'hải long sinh viên năm 2', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-2');
 
 -- --------------------------------------------------------
 
@@ -52,8 +57,16 @@ CREATE TABLE `countries` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `title`, `description`, `status`, `slug`) VALUES
+(2, 'America', 'tạm', 0, '');
 
 -- --------------------------------------------------------
 
@@ -65,7 +78,8 @@ CREATE TABLE `episodes` (
   `id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
   `link_phim` varchar(255) NOT NULL,
-  `episode` int(11) NOT NULL
+  `episode` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -94,7 +108,8 @@ CREATE TABLE `genres` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -133,7 +148,8 @@ CREATE TABLE `movies` (
   `image` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
-  `genre_id` int(11) NOT NULL
+  `genre_id` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -266,13 +282,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `episodes`
@@ -290,7 +306,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
