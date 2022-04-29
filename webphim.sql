@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2022 at 01:32 PM
+-- Generation Time: Apr 29, 2022 at 01:00 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -40,12 +40,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `description`, `status`, `slug`) VALUES
-(3, 'hải long sinh viên năm cuối', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-cuoi'),
-(4, 'bây giờ có phim gì hay ko bạn', 'nhiều bạn ơi', 0, ''),
-(7, 'hải long sinh viên năm 4', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-4'),
-(8, 'hải long sinh viên năm 4', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-4'),
-(9, 'hải long sinh viên năm 3', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-3'),
-(10, 'hải long sinh viên năm 2', 'đẹp trai chưa có ny', 1, 'hai-long-sinh-vien-nam-2');
+(3, 'Phim mới', 'update', 1, 'phim-moi'),
+(4, 'Phim lẻ', 'update', 1, 'phim-le'),
+(7, 'Phim hot', 'update', 1, 'phim-hot');
 
 -- --------------------------------------------------------
 
@@ -66,7 +63,9 @@ CREATE TABLE `countries` (
 --
 
 INSERT INTO `countries` (`id`, `title`, `description`, `status`, `slug`) VALUES
-(2, 'America', 'tạm', 0, '');
+(3, 'Việt Nam', 'Toàn phim hay', 1, 'viet-nam'),
+(4, 'Nhật Bản', 'Hại thận lắm', 1, 'nhat-ban'),
+(5, 'Hàn Quốc', 'Xem đi rồi mà khóc', 1, 'han-quoc');
 
 -- --------------------------------------------------------
 
@@ -112,6 +111,16 @@ CREATE TABLE `genres` (
   `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `genres`
+--
+
+INSERT INTO `genres` (`id`, `title`, `description`, `status`, `slug`) VALUES
+(2, 'Hành động', 'gay cấn', 1, 'hanh-dong'),
+(3, 'Tâm lý tình cảm', 'tâm lý', 1, 'tam-ly-tinh-cam'),
+(4, 'Hài', 'hài hước', 1, 'hai'),
+(5, 'Xã hội đen', 'ghê lắm', 1, 'xa-hoi-den');
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +160,14 @@ CREATE TABLE `movies` (
   `genre_id` int(11) NOT NULL,
   `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `movies`
+--
+
+INSERT INTO `movies` (`id`, `title`, `description`, `status`, `image`, `category_id`, `country_id`, `genre_id`, `slug`) VALUES
+(1, 'The Batman', 'Bộ phim đưa khán giả dõi theo hành trình phá án và diệt trừ tội phạm của chàng Hiệp sĩ Bóng đêm Batman, với một câu chuyện hoàn toàn khác biệt với những phần phim đã ra mắt trước đây. Thế giới ngầm ở thành phố Gotham xuất hiện một tên tội phạm kỳ lạ tên Riddler chuyên nhắm vào nhân vật tai to mặt lớn. Và sau mỗi lần phạm tội, hắn đều để lại một câu đố bí ẩn cho Batman. Khi bắt tay vào phá giải các câu đố này, Batman dần lật mở những bí ẩn động trời giữa gia đình anh và tên trùm tội phạm Carmine Falcon.', 1, '278532046_513882483512671_4008009665851972831_n.jpg', 7, 3, 2, 'the-batman'),
+(2, 'Jisso xinh đẹp', 'Jisso xinh đẹp', 1, 'jiso.jpg', 3, 3, 2, 'jisso-xinh-dep');
 
 -- --------------------------------------------------------
 
@@ -282,13 +299,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `episodes`
@@ -306,7 +323,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -318,7 +335,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
