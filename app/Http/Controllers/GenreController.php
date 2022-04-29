@@ -43,6 +43,7 @@ class GenreController extends Controller
         // dd($data);
         $genre = new Genre();
         $genre->title = $data['title'];
+        $genre->slug = $data['slug'];
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();
@@ -88,6 +89,7 @@ class GenreController extends Controller
         // dd($data);
         $genre = Genre::find($id);
         $genre->title = $data['title'];
+        $genre->slug = $data['slug'];
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();

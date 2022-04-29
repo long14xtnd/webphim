@@ -3,36 +3,69 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Episode;
+use App\Models\Country;
+use App\Models\Movie;
+use App\Models\Genre;
 
 class IndexController extends Controller
 {
     //
-    public function home(){
+    public function home()
+    {
+        // dd(1230);
+        $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+        $genre = Genre::orderBy('id', 'DESC')->get();
+        $country = Country::orderBy('id', 'DESC')->get();
 
-        return view('pages.home');
-    }
-    public function category(){
 
-        return view('pages.category');
+        return view('pages.home', compact('category', 'genre', 'country'));
     }
-    public function country(){
 
-        return view('pages.country');
+    public function category($slug)
+    {
+        $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+        $genre = Genre::orderBy('id', 'DESC')->get();
+        $country = Country::orderBy('id', 'DESC')->get();
+        $cate_slug = Category::where('slug', $slug)->first();  //lấy ra phim theo slug
+        return view('pages.category', compact('category', 'genre', 'country', 'cate_slug'));
     }
-    public function watch(){
+
+    public function country($slug)
+    {
+        $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+        $genre = Genre::orderBy('id', 'DESC')->get();
+        $country = Country::orderBy('id', 'DESC')->get();
+        $cate_slug = Country::where('slug', $slug)->first();  //lấy ra phim theo slug
+//        dd($cate_slug);
+        return view('pages.country', compact('category', 'genre', 'country', 'cate_slug'));
+    }
+
+    public function genre($slug)
+    {
+        $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+        $genre = Genre::orderBy('id', 'DESC')->get();
+        $country = Country::orderBy('id', 'DESC')->get();
+        $cate_slug = Genre::where('slug', $slug)->first();  //lấy ra phim theo slug
+        return view('pages.genre', compact('category', 'genre', 'country', 'cate_slug'));
+    }
+
+    public function watch()
+    {
 
         return view('pages.watch');
     }
-    public function episode(){
+
+    public function episode()
+    {
 
         return view('pages.episode');
     }
-    public function movie(){
+
+    public function movie()
+    {
 
         return view('pages.movie');
-    }
-    public function genre(){
-
-        return view('pages.genre');
     }
 }

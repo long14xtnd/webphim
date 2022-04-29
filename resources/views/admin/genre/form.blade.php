@@ -24,7 +24,15 @@
                         {!! Form::label('title', 'Title');!!}
                         {!! Form::text('title', isset($genre) ? $genre->title : '', ['class' =>
                         'form-control','placeholder'=>'Nhập vào dữ
-                        liệu...','id'=>'title']);!!}
+                        liệu...','id'=>'slug','onkeyup'=>'ChangeToSlug()']);!!}
+
+
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('slug', 'Slug');!!}
+                        {!! Form::text('slug', isset($genre) ? $genre->slug : '', ['class' =>
+                        'form-control','placeholder'=>'Nhập vào dữ
+                        liệu...','id'=>'convert_slug']);!!}
 
 
                     </div>
@@ -37,7 +45,8 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('active', 'Active');!!}
-                        {!! Form::select('status', ['1'=>'Hiển thị','0'=>'Không'],isset($genre)?$genre->status :'', ['class' =>
+                        {!! Form::select('status', ['1'=>'Hiển thị','0'=>'Không'],isset($genre)?$genre->status
+                        :'1', ['class' =>
                         'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'status']);!!}
                     </div>
                     @if(!isset($genre))
@@ -54,6 +63,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề phim</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Mô tả ngắn</th>
                         <th scope="col">Active</th>
                         <th scope="col">Tác vụ</th>
@@ -64,6 +74,7 @@
                     <tr>
                         <th scope="row">{{ $key }}</th>
                         <td>{{ $cate->title }}</td>
+                        <td>{{ $cate->slug }}</td>
                         <td>{{ $cate->description }}</td>
                         @if ($cate->status)
                         <td>Kích hoạt</td>

@@ -46,7 +46,7 @@
                     <div class="form-group">
                         {!! Form::label('active', 'Active');!!}
                         {!! Form::select('status', ['1'=>'Hiển thị','0'=>'Không'],isset($category)?$category->status
-                        :'', ['class' =>
+                        :'1', ['class' =>
                         'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'status']);!!}
                     </div>
                     @if(!isset($category))

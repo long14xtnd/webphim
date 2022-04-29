@@ -21,13 +21,13 @@ use App\Http\Controllers\CountryController;
 */
 
 Route::get('/', [IndexController::class, 'home'])->name('homepage');
-Route::get('/danh-muc', [IndexController::class, 'category'])->name('category');
-Route::get('/quoc-gia', [IndexController::class, 'country'])->name('country');
-Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
-Route::get('/the-loai', [IndexController::class, 'genre'])->name('genre');
+Route::get('/danh-muc/{slug}', [IndexController::class, 'category'])->name('category');
+Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
+
+Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/xem-phim', [IndexController::class, 'watch'])->name('watch');
 Route::get('/phim', [IndexController::class, 'movie'])->name('movie');
-
+Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 
 Auth::routes();
 
