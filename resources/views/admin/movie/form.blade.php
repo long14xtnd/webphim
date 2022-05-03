@@ -18,7 +18,7 @@
                         @if(!isset($movie))
                             {!! Form::open(['route' => 'movie.store','method'=>'POST','enctype'=>'multipart/form-data']) !!}
                         @else
-                            {!! Form::open(['route' => ['movie.update',$movie->id],'method'=>'PUT']) !!}
+                            {!! Form::open(['route' => ['movie.update',$movie->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
                         @endif
                         <div class="form-group">
                             {!! Form::label('title', 'Title');!!}
@@ -71,6 +71,10 @@
                             {!! Form::label('Image', 'Image');!!}
                             {!! Form::file('image', ['class' =>'form-control-file'])!!}
 
+                            @if($movie)
+                                <img width="40%" src="{{ asset('public/uploads/movie/'.$movie->image) }}">
+                            @endif
+
                         </div>
 
 
@@ -88,9 +92,12 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề phim</th>
-                        <th scope="col">Slug</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Mô tả ngắn</th>
                         <th scope="col">Active</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Country</th>
                         <th scope="col">Tác vụ</th>
                     </tr>
                     </thead>
@@ -99,13 +106,17 @@
                         <tr>
                             <th scope="row">{{ $key }}</th>
                             <td>{{ $cate->title }}</td>
-                            <td>{{ $cate->slug }}</td>
+                            <td><img width="70%" src="{{ asset('public/uploads/movie/'.$cate->image) }}"></td>
+
                             <td>{{ $cate->description }}</td>
                             @if ($cate->status)
                                 <td>Kích hoạt</td>
                             @else
                                 <td>Không kích hoạt</td>
                             @endif
+                            <td>{{ $cate->category->title }}</td>
+                            <td>{{ $cate->genre->title }}</td>
+                            <td>{{ $cate->country->title }}</td>
 
                             <td>
                                 {!! Form::open(['method' => 'DELETE','route'
