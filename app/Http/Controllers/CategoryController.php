@@ -26,14 +26,14 @@ class CategoryController extends Controller
     {
         //
 
-        $list = Category::all();
+        $list = Category::orderBy('position', 'ASC')->get();
         return view('admin.category.form', compact('list'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,22 +64,22 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
         $category = Category::find($id);
-        $list = Category::all();
+        $list = Category::orderBy('position', 'ASC')->get();
         return view('admin.category.form', compact('list', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,7 +99,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -107,5 +107,15 @@ class CategoryController extends Controller
         //
         Category::find($id)->delete();
         return redirect()->back();
+    }
+
+    public function resorting_category(Request $request)
+    {
+        $data = $request->all();
+        foreach ($data['array_id'] as $key => $value) {
+            $category = Category::find($value);
+            $category->position = $key;
+            $category->save();
+        }
     }
 }

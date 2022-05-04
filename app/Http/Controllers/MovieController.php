@@ -19,7 +19,8 @@ class MovieController extends Controller
     public function index()
     {
         //
-
+        $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
+        return view('admin.movie.index', compact('list', ));
     }
 
     /**
@@ -30,11 +31,11 @@ class MovieController extends Controller
     public function create()
     {
         //
-        $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
+//        $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
         $category = Category::pluck('title', 'id'); //lấy ra danh mục phim trong db bao gồm title và id
         $country = Country::pluck('title', 'id');
         $genre = Genre::pluck('title', 'id');
-        return view('admin.movie.form', compact('list', 'category', 'country', 'genre'));
+        return view('admin.movie.form', compact('category', 'country', 'genre'));
     }
 
     /**
@@ -95,12 +96,12 @@ class MovieController extends Controller
     public function edit($id)
     {
         //
-        $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
+//        $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
         $category = Category::pluck('title', 'id'); //lấy ra danh mục phim trong db bao gồm title và id
         $country = Country::pluck('title', 'id');
         $genre = Genre::pluck('title', 'id');
         $movie = Movie::find($id);
-        return view('admin.movie.form', compact('list', 'category', 'country', 'genre', 'movie'));
+        return view('admin.movie.form', compact( 'category', 'country', 'genre', 'movie'));
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\LongController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +42,7 @@ Route::resource('/movie', MovieController::class);
 Route::resource('/watch', WatchController::class);
 Route::resource('/genre', GenreController::class);
 Route::resource('/episode', EpisodeController::class);
+
+Route::post('resorting',[CategoryController::class,'resorting_category'])->name('resorting_category');
+
+Route::get('/hailongdev', [LongController::class, 'hailongdev']);

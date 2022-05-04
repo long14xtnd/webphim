@@ -18,9 +18,10 @@ class IndexController extends Controller
         $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
         $genre = Genre::orderBy('id', 'DESC')->get();
         $country = Country::orderBy('id', 'DESC')->get();
+        //thực hiện truy vấn lấy ra các danh mục ở trạng thái hiển thị,sắp xếp mới nhất kèm theo các phim của danh mục đó
+        $category_home = Category::with('movie')->orderBy('id', 'DESC')->where('status', 1)->get();
 
-
-        return view('pages.home', compact('category', 'genre', 'country'));
+        return view('pages.home', compact('category', 'genre', 'country','category_home'));
     }
 
     public function category($slug)
