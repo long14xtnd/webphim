@@ -27,7 +27,7 @@ Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('count
 
 Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/xem-phim', [IndexController::class, 'watch'])->name('watch');
-Route::get('/phim', [IndexController::class, 'movie'])->name('movie');
+Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 
 Auth::routes();

@@ -20,7 +20,7 @@ class MovieController extends Controller
     {
         //
         $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
-        return view('admin.movie.index', compact('list', ));
+        return view('admin.movie.index', compact('list',));
     }
 
     /**
@@ -51,12 +51,15 @@ class MovieController extends Controller
         // dd($data);
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->eng_name = $data['eng_name'];
+        $movie->resolution = $data['resolution'];
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
+        $movie->phim_hot = $data['phim_hot'];
 //        $movie->image = $data['image'];
 
         //them hinh anh
@@ -101,7 +104,7 @@ class MovieController extends Controller
         $country = Country::pluck('title', 'id');
         $genre = Genre::pluck('title', 'id');
         $movie = Movie::find($id);
-        return view('admin.movie.form', compact( 'category', 'country', 'genre', 'movie'));
+        return view('admin.movie.form', compact('category', 'country', 'genre', 'movie'));
     }
 
     /**
@@ -118,13 +121,17 @@ class MovieController extends Controller
         // dd($data);
         $movie = Movie::find($id);
         $movie->title = $data['title'];
+        $movie->eng_name = $data['eng_name'];
+        $movie->resolution = $data['resolution'];
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
+        $movie->phim_hot = $data['phim_hot'];
 //        $movie->image = $data['image'];
+
 
         //them hinh anh
         $get_imgage = $request->file('image');

@@ -29,6 +29,20 @@
 
                         </div>
                         <div class="form-group">
+                            {!! Form::label('Tên tiếng anh', 'Tên tiếng anh');!!}
+                            {!! Form::text('eng_name', isset($movie) ? $movie->eng_name : '', ['class' =>
+                            'form-control','placeholder'=>'Nhập vào dữ
+                            liệu...']);!!}
+
+
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('resolution', 'Định dạng');!!}
+                            {!! Form::select('resolution', ['0'=>'HD','1'=>'SD','2'=>'CAM','3'=>'HDCam',4=>'FullHD'],isset($movie)?$movie->resolution
+                            :'1', ['class' =>
+                            'form-control','id'=>'resolution']);!!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('slug', 'Slug');!!}
                             {!! Form::text('slug', isset($movie) ? $movie->slug : '', ['class' =>
                             'form-control','placeholder'=>'Nhập vào dữ
@@ -47,7 +61,7 @@
                             {!! Form::label('active', 'Active');!!}
                             {!! Form::select('status', ['1'=>'Hiển thị','0'=>'Không'],isset($movie)?$movie->status
                             :'1', ['class' =>
-                            'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'status']);!!}
+                            'form-control','id'=>'status']);!!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('category', 'Category');!!}
@@ -66,6 +80,12 @@
                             {!! Form::select('genre_id', $genre,isset($movie)?$movie->genre_id
                             :'', ['class' =>    'form-control']);!!}
 
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('phim_hot', 'Phim Hot');!!}
+                            {!! Form::select('phim_hot', ['1'=>'Hiển thị','0'=>'Không'],isset($movie)?$movie->phim_hot
+                            :'1', ['class' =>
+                            'form-control','id'=>'phim_hot']);!!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('Image', 'Image');!!}
@@ -87,8 +107,6 @@
 
                     </div>
                 </div>
-
-
 
 
             </div>
