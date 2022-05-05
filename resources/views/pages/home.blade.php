@@ -88,7 +88,7 @@
                         @foreach($cate_home->movie->take(12) as $key=>$movie_home)
                             <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                                 <div class="halim-item">
-                                    <a class="halim-thumb" href="chitiet.php">
+                                    <a class="halim-thumb" href="{{ route('movie',$movie_home->slug) }}">
                                         <figure><img class="lazy img-responsive"
                                                      src="{{ asset('public/uploads/movie/'.$movie_home->image) }}"
                                                      alt="{{ $movie_home->title }}" title="{{ $movie_home->title }}">
