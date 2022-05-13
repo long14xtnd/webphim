@@ -151,6 +151,16 @@
                                 @endforeach
                             </ul>
                         </li>
+                        <li class="mega dropdown">
+                            <a title="Năm" href="#" data-toggle="dropdown" class="dropdown-toggle"
+                               aria-haspopup="true">Năm<span class="caret"></span></a>
+                            <ul role="menu" class=" dropdown-menu">
+                              @for($year=2000;$year<=2022;$year++)
+                                    <li><a title="{{ $year }}" href="{{ url('nam/'.$year) }}">{{
+                                            $year }}</a></li>
+                                @endfor
+                            </ul>
+                        </li>
 
                     </ul>
                 </div>

@@ -24,4 +24,20 @@ class Movie extends Model
     {
         return $this->belongsTo(Genre::class, 'genre_id');
     }
+
+    protected function getLengthAttribute()
+    {
+        return $this->thoiluong;
+    }
+
+    protected function getFullNameAttribute()
+    {
+
+        return $this->title . '-' .$this->description;
+    }
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+    }
+
 }

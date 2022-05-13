@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Models\Genre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class MovieController extends Controller
 {
@@ -21,6 +23,30 @@ class MovieController extends Controller
         //
         $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
         return view('admin.movie.index', compact('list',));
+    }
+
+    public function update_year_phim(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->year = $data['year'];
+        $movie->save();
+    }
+
+    public function update_season(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->season = $data['season'];
+        $movie->save();
+    }
+
+    public function update_topview_phim(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->topview = $data['topview'];
+        $movie->save();
     }
 
     /**
@@ -51,8 +77,12 @@ class MovieController extends Controller
         // dd($data);
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->topview = $data['topview'];
+        $movie->tags = $data['tags'];
+        $movie->thoiluong = $data['thoiluong'];
         $movie->eng_name = $data['eng_name'];
         $movie->resolution = $data['resolution'];
+        $movie->phude = $data['phude'];
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
@@ -60,6 +90,9 @@ class MovieController extends Controller
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
         $movie->phim_hot = $data['phim_hot'];
+        $movie->ngaytao = Carbon::now('Asia/Ho_Chi_Minh');
+        $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
+//        $movie->year = $data['year'];
 //        $movie->image = $data['image'];
 
         //them hinh anh
@@ -121,8 +154,12 @@ class MovieController extends Controller
         // dd($data);
         $movie = Movie::find($id);
         $movie->title = $data['title'];
+        $movie->topview = $data['topview'];
+        $movie->tags = $data['tags'];
+        $movie->thoiluong = $data['thoiluong'];
         $movie->eng_name = $data['eng_name'];
         $movie->resolution = $data['resolution'];
+        $movie->phude = $data['phude'];
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
@@ -130,6 +167,8 @@ class MovieController extends Controller
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
         $movie->phim_hot = $data['phim_hot'];
+
+        $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
 //        $movie->image = $data['image'];
 
 
@@ -138,8 +177,9 @@ class MovieController extends Controller
 //        $path = 'public/uploads/movie/';
 
         if ($get_imgage) {
-            if (!empty($movie->image)) {
-                unlink('public/uploads/movie/' . $movie->image);
+
+            if (file_exists('public/uploads/movie' . $movie->image)) {
+                unlink('public/uploads/movie' . $movie->image);
             }
             $get_name_image = $get_imgage->getClientOriginalName(); //hinhanh1.png
             $name_image = current(explode('.', $get_name_image));
@@ -163,8 +203,8 @@ class MovieController extends Controller
     {
         //
         $movie = Movie::find($id);
-        if (!empty($movie->image)) {
-            unlink('public/uploads/movie/' . $movie->image);
+        if (file_exists('public/uploads/movie' . $movie->image)) {
+            unlink('public/uploads/movie' . $movie->image);
         }
         $movie->delete();
         return redirect()->back();

@@ -48,18 +48,52 @@
                                 <h2 class="movie-title title-2" style="font-size: 12px;">{{ $movie->eng_name }}</h2>
                                 <ul class="list-info-group">
                                     <li class="list-info-group-item"><span>Trạng Thái</span> : <span
-                                            class="quality">HD</span><span class="episode">Vietsub</span></li>
+                                            class="quality">
+                                            @if($movie->resolution==0)
+                                                HD
+                                            @elseif($movie->resolution==1)
+                                                SD
+                                            @elseif($movie->resolution==2)
+                                                CAM
+                                            @elseif($movie->resolution==3)
+                                                HDCam
+                                            @elseif($movie->resolution==4)
+                                                FullHD
+                                            @endif
 
-                                    <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
-                                    <li class="list-info-group-item"><span>Danh mục</span> : <a
-                                            href="{{ route('category',$movie->category->slug) }}"
-                                            rel="category tag">{{ $movie->category->title }}</a></li>
-                                    <li class="list-info-group-item"><span>Thể loại</span> : <a
-                                            href="{{ route('genre',$movie->genre->slug) }}"
-                                            rel="category tag">{{ $movie->genre->title }}</a></li>
-                                    <li class="list-info-group-item"><span>Quốc gia</span> : <a
-                                            href="{{ route('country',$movie->country->slug) }}"
-                                            rel="tag">{{ $movie->country->title }}</a></li>
+
+                                        </span><span class="episode">
+                                              @if($movie->phude==0)
+                                                Việt Sub
+                                            @elseif($movie->phude==1)
+                                                Thuyết minh
+                                            @endif
+                                        </span></li>
+                                    @if($movie->season!=0)
+                                        <li class="list-info-group-item"><span>Năm phát hành</span>
+                                            : {{ $movie->season }}
+                                    @endif
+
+                                    <li class="list-info-group-item"><span>Season</span> : {{ $movie->year }}
+                                    </li>
+
+
+                                        <li class="list-info-group-item"><span>TAG</span> : {{$movie->fullName}}
+                                        </li>
+
+
+                                        <li class="list-info-group-item"><span>Thời lượng</span>
+                                            : {{ $movie->thoiluong }}
+                                        </li>
+                                        <li class="list-info-group-item"><span>Danh mục</span> : <a
+                                                href="{{ route('category',$movie->category->slug) }}"
+                                                rel="category tag">{{ $movie->category->title }}</a></li>
+                                        <li class="list-info-group-item"><span>Thể loại</span> : <a
+                                                href="{{ route('genre',$movie->genre->slug) }}"
+                                                rel="category tag">{{ $movie->genre->title }}</a></li>
+                                        <li class="list-info-group-item"><span>Quốc gia</span> : <a
+                                                href="{{ route('country',$movie->country->slug) }}"
+                                                rel="tag">{{ $movie->country->title }}</a></li>
 
                                 </ul>
                                 <div class="movie-trailer hidden"></div>
@@ -79,6 +113,28 @@
                             </article>
                         </div>
                     </div>
+                    <div class="section-bar clearfix">
+                        <h2 class="section-title"><span style="color:#ffed4d">Tags</span></h2>
+                    </div>
+                    <div class="entry-content htmlwrap clearfix">
+                        <div class="video-item halim-entry-box">
+                            <article id="post-38424" class="item-content">
+                                @if($movie->tags!=NULL)
+                                    @php
+                                        $tags=array();
+                                        $tags=explode(',',$movie->tags);
+                                    @endphp
+                                    @foreach($tags as $key=>$tag)
+                                        <a href="{{ url('tag/'.$tag) }}">{{ $tag }}</a>
+                                    @endforeach
+                                @else
+                                    Chưa có tags cho phim này!
+                                @endif
+
+
+                            </article>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section class="related-movies">
@@ -90,7 +146,8 @@
                         @foreach($related_movie as $key=>$related)
                             <article class="thumb grid-item post-38498">
                                 <div class="halim-item">
-                                    <a class="halim-thumb" href="{{ route('movie',$related->slug) }}"
+                                    <a class="halim-thumb"
+                                       href="{{ route('movie',['slug'=>$related->slug,'id'=>$related->id]) }}"
                                        title="Đại Thánh Vô Song">
                                         <figure><img class="lazy img-responsive"
                                                      src="{{ asset('public/uploads/movie/'.$related->image) }}"

@@ -100,6 +100,7 @@
 
     </script>
 
+
 </head>
 
 <body>
@@ -210,6 +211,73 @@
         //In slug ra textbox có id “slug”
         document.getElementById('convert_slug').value = slug;
     }
+</script>
+<script>
+    $('.select-year').change(function () {
+        // alert('change');
+        var year = $(this).find(':selected').val();
+        var id_phim = $(this).attr('id');
+        // alert(year);
+        // alert(id_phim)
+        $.ajax({
+
+            url: "{{ url('/update-year-phim') }}",
+            method: 'GET',
+            data: {year: year, id_phim: id_phim},
+            success: function (data) {
+                alert('Thay đổi phim theo năm ' + year + ' thành công');
+            }
+
+        })
+    })
+
+</script>
+<script>
+    $('.select-season').change(function () {
+        // alert('change');
+        var season = $(this).find(':selected').val();
+        var id_phim = $(this).attr('id');
+        // alert(year);
+        // alert(id_phim)
+        $.ajax({
+
+            url: "{{ url('/update-season-phim') }}",
+            method: 'GET',
+            data: {season: season, id_phim: id_phim},
+            success: function (data) {
+                alert('Thay đổi phim theo season ' + season + ' thành công');
+            }
+
+        })
+    })
+
+</script>
+<script>
+    $('.select-topview').change(function () {
+        // alert('change');
+        var topview = $(this).find(':selected').val();
+        var id_phim = $(this).attr('id');
+        // alert(year);
+        // alert(id_phim)
+        if (topview == 0) {
+            var text = "Ngày";
+        } else if (topview == 1) {
+            var text = "Tuần";
+        } else {
+            var text = "Tháng";
+        }
+        $.ajax({
+
+            url: "{{ url('/update-topview-phim') }}",
+            method: 'GET',
+            data: {topview: topview, id_phim: id_phim},
+            success: function (data) {
+                alert('Thay đổi phim theo topview ' + text + ' thành công');
+            }
+
+        })
+    })
+
 </script>
 
 </body>

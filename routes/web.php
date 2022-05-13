@@ -10,6 +10,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\LongController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,9 +28,10 @@ Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('count
 
 Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/xem-phim', [IndexController::class, 'watch'])->name('watch');
-Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
+Route::get('/phim/{slug}.m{id}.html', [IndexController::class, 'movie'])->name('movie');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
-
+Route::get('/nam/{year}', [IndexController::class, 'year']);
+Route::get('/tag/{tag}', [IndexController::class, 'tag']);
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -43,6 +45,9 @@ Route::resource('/watch', WatchController::class);
 Route::resource('/genre', GenreController::class);
 Route::resource('/episode', EpisodeController::class);
 
-Route::post('resorting',[CategoryController::class,'resorting_category'])->name('resorting_category');
+Route::post('resorting', [CategoryController::class, 'resorting_category'])->name('resorting_category');
 
 Route::get('/hailongdev', [LongController::class, 'hailongdev']);
+Route::get('/update-year-phim', [MovieController::class, 'update_year_phim']);
+Route::get('/update-topview-phim', [MovieController::class, 'update_topview_phim']);
+Route::get('/update-season-phim', [MovieController::class, 'update_season']);
