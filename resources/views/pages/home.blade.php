@@ -61,7 +61,7 @@
                                              src="{{ asset('public/uploads/movie/'.$hot->image) }}"
                                              alt="{{ $hot->title }}" title="{{ $hot->title }}"></figure>
                                 <span class="status">
-                                    @if($hot->resolution==0)
+                                    @if ($hot->resolution==0)
                                         HD
                                     @elseif($hot->resolution==1)
                                         SD
@@ -71,6 +71,8 @@
                                         HDCam
                                     @elseif($hot->resolution==4)
                                         FullHD
+                                    @else
+                                        Trailer
                                     @endif
 
 
@@ -95,8 +97,13 @@
                                 <div class="icon_overlay"></div>
                                 <div class="halim-post-title-box">
                                     <div class="halim-post-title ">
-                                        <p class="entry-title">{{ $hot->title }}</p>
-                                        <p class="original_title">{{ $hot->eng_name }}</p>
+                                        <p class="entry-title">{{ $hot->title }}
+                                        @if($hot->eng_name )
+                                            <p class="original_title">{{ $hot->eng_name }}</p>
+                                        @else
+
+                                        @endif
+
                                     </div>
                                 </div>
                             </a>
@@ -126,7 +133,7 @@
                                                      alt="{{ $movie_home->title }}" title="{{ $movie_home->title }}">
                                         </figure>
                                         <span class="status">
-                                             @if($movie_home->resolution==0)
+                                            @if ($movie_home->resolution==0)
                                                 HD
                                             @elseif($movie_home->resolution==1)
                                                 SD
@@ -136,9 +143,12 @@
                                                 HDCam
                                             @elseif($movie_home->resolution==4)
                                                 FullHD
+                                            @else
+                                                Trailer
                                             @endif
-                                        </span><span class="episode"><i class="fa fa-play"
-                                                                        aria-hidden="true"></i>
+                                        </span>
+                                        <span class="episode"><i class="fa fa-play"
+                                                                 aria-hidden="true"></i>
                                         @if($movie_home->phude==0)
 
 
@@ -159,7 +169,12 @@
                                         <div class="halim-post-title-box">
                                             <div class="halim-post-title ">
                                                 <p class="entry-title">{{ $movie_home->title }}</p>
-                                                <p class="original_title">{{ $movie_home->eng_name }}</p>
+                                                @if($movie_home->eng_name )
+                                                    <p class="original_title">{{ $movie_home->eng_name }}</p>
+                                                @else
+
+                                                @endif
+
                                             </div>
                                         </div>
                                     </a>

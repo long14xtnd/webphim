@@ -30,6 +30,8 @@
     <meta property="og:image" content=""/>
     <meta property="og:image:width" content="300"/>
     <meta property="og:image:height" content="55"/>
+    <meta property="fb:app_id" content="1430225714079442" />
+    <meta property="fb:admins" content="100011387450663"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
     <link rel='dns-prefetch' href='//s.w.org'/>
@@ -39,6 +41,7 @@
     <link rel='stylesheet' id='wp-block-library-css' href='{{ url('public/css/style.min.css?ver=5.7.2') }}'
           media='all'/>
     <script type='text/javascript' src='{{ url('public/js/jquery.min.js?ver=5.7.2') }}' id='halim-jquery-js'></script>
+
     <style type="text/css" id="wp-custom-css">
         .textwidget p a img {
             width: 100%;
@@ -155,7 +158,7 @@
                             <a title="Năm" href="#" data-toggle="dropdown" class="dropdown-toggle"
                                aria-haspopup="true">Năm<span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
-                              @for($year=2000;$year<=2022;$year++)
+                                @for($year=2000;$year<=2022;$year++)
                                     <li><a title="{{ $year }}" href="{{ url('nam/'.$year) }}">{{
                                             $year }}</a></li>
                                 @endfor
@@ -204,9 +207,21 @@
 </footer>
 <div id='easy-top'></div>
 
+<!-- Facebook JavaScript SDK -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1430225714079442";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<!-- End Facebook JavaScript SDK -->
 <script type='text/javascript' src='{{ url('public/js/bootstrap.min.js?ver=5.7.2') }}' id='bootstrap-js'></script>
 <script type='text/javascript' src='{{ url('public/js/owl.carousel.min.js?ver=5.7.2') }}' id='carousel-js'>
 </script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=6125793717446054&autoLogAppEvents=1" nonce="LGtRA0Ug"></script>
 
 <script type='text/javascript' src='{{ url('public/js/halimtheme-core.min.js?ver=1626273138') }}'
         id='halim-init-js'></script>
@@ -414,6 +429,14 @@
         })
     });
 </script>
+<script>
+    $("#watch_trailer").click(function (e) {
+        e.preventDefault();
+        var aid = $(this).attr("href");
+        $('html,body').animate({scrollTop: $(aid).offset().top}, 'slow');
+    });
+</script>
+
 </body>
 
 </html>

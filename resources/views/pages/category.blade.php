@@ -33,7 +33,7 @@
                                                  src="{{ asset('public/uploads/movie/'.$mov->image) }}"
                                                  alt="{{ $mov->title }}" title="{{ $mov->title }}"></figure>
                                     <span class="status">
-                                          @if($mov->resolution==0)
+                                           @if ($mov->resolution==0)
                                             HD
                                         @elseif($mov->resolution==1)
                                             SD
@@ -43,9 +43,12 @@
                                             HDCam
                                         @elseif($mov->resolution==4)
                                             FullHD
+                                        @else
+                                            Trailer
                                         @endif
-                                    </span><span class="episode"><i class="fa fa-play"
-                                                                    aria-hidden="true"></i>
+                                    </span>
+                                    <span class="episode"><i class="fa fa-play"
+                                                             aria-hidden="true"></i>
                                        @if($mov->phude==0)
 
 
@@ -66,7 +69,11 @@
                                     <div class="halim-post-title-box">
                                         <div class="halim-post-title ">
                                             <p class="entry-title">{{ $mov->title }}</p>
-                                            <p class="original_title">{{ $mov->eng_name }}</p>
+                                            @if($mov->eng_name )
+                                                <p class="original_title">{{ $mov->eng_name }}</p>
+                                            @else
+
+                                            @endif
                                         </div>
                                     </div>
                                 </a>

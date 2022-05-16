@@ -35,7 +35,7 @@ class Movie extends Model
 
         return $this->title . '-' .$this->description;
     }
-    public function setTitleAttribute($value)
+    public function setTilelongAttribute($value)
     {
         $this->attributes['title'] = $value;
     }

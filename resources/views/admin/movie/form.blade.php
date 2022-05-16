@@ -29,6 +29,14 @@
 
                         </div>
                         <div class="form-group">
+                            {!! Form::label('trailer', 'Trailer');!!}
+                            {!! Form::text('trailer', isset($movie) ? $movie->trailer : '', ['class' =>
+                            'form-control','placeholder'=>'Nhập vào dữ
+                            liệu...']);!!}
+
+
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('tags', 'Tag');!!}
                             {!! Form::text('tags', isset($movie) ? $movie->tags : '', ['class' =>
                             'form-control','placeholder'=>'Nhập vào dữ
@@ -54,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('resolution', 'Định dạng');!!}
-                            {!! Form::select('resolution', ['0'=>'HD','1'=>'SD','2'=>'CAM','3'=>'HDCam',4=>'FullHD'],isset($movie)?$movie->resolution
+                            {!! Form::select('resolution', ['0'=>'HD','1'=>'SD','2'=>'CAM','3'=>'HDCam','4'=>'FullHD','5'=>'Trailer'],isset($movie)?$movie->resolution
                             :'1', ['class' =>
                             'form-control','id'=>'resolution']);!!}
                         </div>

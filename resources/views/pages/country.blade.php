@@ -27,12 +27,13 @@
                     @foreach($movie as $key=>$mov)
                         <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-27021">
                             <div class="halim-item">
-                                <a class="halim-thumb" href="{{ route('movie',['slug'=>$mov->slug,'id'=>$mov->id]) }}" title="{{ $mov->title }}">
+                                <a class="halim-thumb" href="{{ route('movie',['slug'=>$mov->slug,'id'=>$mov->id]) }}"
+                                   title="{{ $mov->title }}">
                                     <figure><img class="lazy img-responsive"
                                                  src="{{ asset('public/uploads/movie/'.$mov->image) }}"
                                                  alt="{{ $mov->title }}" title="{{ $mov->title }}"></figure>
                                     <span class="status">
-                                          @if($mov->resolution==0)
+                                          @if ($mov->resolution==0)
                                             HD
                                         @elseif($mov->resolution==1)
                                             SD
@@ -42,9 +43,11 @@
                                             HDCam
                                         @elseif($mov->resolution==4)
                                             FullHD
+                                        @else
+                                            Trailer
                                         @endif
                                     </span><span class="episode"><i class="fa fa-play"
-                                                                                            aria-hidden="true"></i>
+                                                                    aria-hidden="true"></i>
                                         @if($mov->phude==0)
 
 
@@ -65,7 +68,11 @@
                                     <div class="halim-post-title-box">
                                         <div class="halim-post-title ">
                                             <p class="entry-title">{{ $mov->title }}</p>
-                                            <p class="original_title">{{ $mov->eng_name }}</p>
+                                            @if($mov->eng_name )
+                                                <p class="original_title">{{ $mov->eng_name }}</p>
+                                            @else
+
+                                            @endif
                                         </div>
                                     </div>
                                 </a>
@@ -88,6 +95,6 @@
                 </div>
             </section>
         </main>
-        <  @include('pages.include.sidebar')
+        < @include('pages.include.sidebar')
     </div>
 @endsection

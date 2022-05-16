@@ -9,6 +9,7 @@ use App\Models\Genre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use File;
 
 
 class MovieController extends Controller
@@ -22,6 +23,12 @@ class MovieController extends Controller
     {
         //
         $list = Movie::with('category', 'country', 'genre')->orderBY('id', 'DESC')->get();
+        $path = public_path() . "/json/";
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+
+        }
+        File::put($path . 'movies.json', json_encode($list));
         return view('admin.movie.index', compact('list',));
     }
 
@@ -79,6 +86,7 @@ class MovieController extends Controller
         $movie->title = $data['title'];
         $movie->topview = $data['topview'];
         $movie->tags = $data['tags'];
+        $movie->trailer = $data['trailer'];
         $movie->thoiluong = $data['thoiluong'];
         $movie->eng_name = $data['eng_name'];
         $movie->resolution = $data['resolution'];
@@ -156,6 +164,7 @@ class MovieController extends Controller
         $movie->title = $data['title'];
         $movie->topview = $data['topview'];
         $movie->tags = $data['tags'];
+        $movie->trailer = $data['trailer'];
         $movie->thoiluong = $data['thoiluong'];
         $movie->eng_name = $data['eng_name'];
         $movie->resolution = $data['resolution'];
