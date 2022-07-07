@@ -21,6 +21,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">Genre</th>
                         <th scope="col">Country</th>
+                        <th scope="col">Số tập</th>
                         <th scope="col">Phim hot</th>
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày cập nhật</th>
@@ -79,8 +80,15 @@
                                 <td>Không kích hoạt</td>
                             @endif
                             <td>{{ $cate->category->title }}</td>
-                            <td>{{ $cate->genre->title }}</td>
+                            <td>
+                                @foreach($cate->movie_genre as $gen)
+                                    <span class="badge badge-warning">  {{ $gen->title }}</span>
+
+                                @endforeach
+                            </td>
+
                             <td>{{ $cate->country->title }}</td>
+                            <td>{{ $cate->sotap }}</td>
                             @if ($cate->phim_hot)
                                 <td>Kích hoạt</td>
                             @else

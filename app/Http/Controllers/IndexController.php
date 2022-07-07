@@ -8,12 +8,35 @@ use App\Models\Episode;
 use App\Models\Country;
 use App\Models\Movie;
 use App\Models\Genre;
+use App\Models\Movie_Genre;
 use App\Http\Controllers\Input;
 use DB;
 
 class IndexController extends Controller
 {
-    //
+    //Tìm kiếm phim
+    public function timkiem()
+    {
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $category = Category::orderBy('position', 'ASC')->where('status', 1)->get();
+            $genre = Genre::orderBy('id', 'DESC')->get();
+            $country = Country::orderBy('id', 'DESC')->get();
+            $phimhot_sidebar = Movie::where('phim_hot', 1)->where('status', 1)->orderBy('ngaycapnhat', 'DESC')->take(30)->get();
+            $movie_trailer = Movie::where('resolution', 5)->where('status', 1)->orderBy('ngaycapnhat', 'DESC')->take(10)->get();
+
+
+            $movie = Movie::where('title', 'LIKE', '%' . $search . '%')->orderBy('ngaycapnhat', 'DESC')->paginate(40);
+
+            return view('pages.timkiem', compact('category', 'genre', 'country', 'search', 'movie', 'phimhot_sidebar', 'movie_trailer','search'));
+
+        } else {
+            return redirect()->to('/');
+        }
+
+
+    }
+
     public function home()
     {
         // dd(1230);
@@ -65,7 +88,15 @@ class IndexController extends Controller
         $country = Country::orderBy('id', 'DESC')->get();
         $cate_slug = Genre::where('slug', $slug)->first();  //lấy ra phim theo slug
         //lấy ra phim theo thể loại
-        $movie = Movie::where('genre_id', $cate_slug->id)->orderBy('ngaycapnhat', 'DESC')->paginate(40);
+//        $movie = Movie::where('genre_id', $cate_slug->id)->orderBy('ngaycapnhat', 'DESC')->paginate(40);
+        //phim nhieu the loai
+        $movie_genre = Movie_Genre::where('genre_id',$cate_slug->id)->get();
+        $many_genre = [];
+        foreach ($movie_genre as $key=>$movi){
+            $many_genre[]=$movi->movie_id;
+        }
+//        return response()->json($many_genre);
+        $movie = Movie::whereIn('id', $many_genre)->orderBy('ngaycapnhat', 'DESC')->paginate(40);
         return view('pages.genre', compact('category', 'genre', 'country', 'cate_slug', 'movie', 'phimhot_sidebar', 'movie_trailer'));
     }
 
@@ -87,7 +118,7 @@ class IndexController extends Controller
         $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
         $genre = Genre::orderBy('id', 'DESC')->get();
         $country = Country::orderBy('id', 'DESC')->get();
-        $movie = Movie::with('category', 'country', 'genre')->where('id', $id)->where('status', 1)->first();
+        $movie = Movie::with('category', 'country', 'genre','movie_genre')->where('id', $id)->where('status', 1)->first();
 //        $movie->title = 'long';
 //        $movie->save();
         //phim liên quan

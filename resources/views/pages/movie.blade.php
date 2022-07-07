@@ -11,6 +11,7 @@
                                             href="{{ route('country',$movie->country->slug) }}">{{ $movie->country->title }}</a> » <span
                                             class="breadcrumb_last"
                                             aria-current="page">{{ $movie->title }}</span></span></span></span></div>
+
                     </div>
                 </div>
             </div>
@@ -106,13 +107,22 @@
                                         </li>
                                     @endif
 
+                                    <li class="list-info-group-item"><span>Số tập</span>
+                                        : {{ $movie->sotap }}/{{ $movie->sotap }}
+                                    </li>
 
                                     <li class="list-info-group-item"><span>Danh mục</span> : <a
                                             href="{{ route('category',$movie->category->slug) }}"
                                             rel="category tag">{{ $movie->category->title }}</a></li>
-                                    <li class="list-info-group-item"><span>Thể loại</span> : <a
-                                            href="{{ route('genre',$movie->genre->slug) }}"
-                                            rel="category tag">{{ $movie->genre->title }}</a></li>
+                                    <li class="list-info-group-item"><span>Thể loại</span> :
+
+                                        @foreach($movie->movie_genre as $gen)
+                                            <a
+                                                href="{{ route('genre',$gen->slug) }}"
+                                                rel="category tag">{{ $gen->title }}</a>
+                                        @endforeach
+
+                                    </li>
                                     <li class="list-info-group-item"><span>Quốc gia</span> : <a
                                             href="{{ route('country',$movie->country->slug) }}"
                                             rel="tag">{{ $movie->country->title }}</a></li>
@@ -179,12 +189,14 @@
                     <div class="entry-content htmlwrap clearfix">
                         @php
                             $current_url = Request::url();
+                            //echo $current_url;
 
                         @endphp
                         <div class="video-item halim-entry-box">
                             <article id="post-38424" class="item-content">
-                                <div class="fb-comments" data-href="{{$current_url}}" data-width="100%"
-                                     data-numposts="10"></div>
+                                <div class="fb-comments"
+                                     data-href="{{ $current_url }}"
+                                     data-width="100%" data-numposts="10" style="background: #E0FFFF"></div>
 
                             </article>
                         </div>

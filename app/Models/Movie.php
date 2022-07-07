@@ -25,6 +25,15 @@ class Movie extends Model
         return $this->belongsTo(Genre::class, 'genre_id');
     }
 
+    public function movie_genre(){
+        return $this->belongsToMany(Genre::class,'movie_genres','movie_id','genre_id');
+    }
+
+    public function setTilelongAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+    }
+
     protected function getLengthAttribute()
     {
         return $this->thoiluong;
@@ -33,11 +42,7 @@ class Movie extends Model
     protected function getFullNameAttribute()
     {
 
-        return $this->title . '-' .$this->description;
-    }
-    public function setTilelongAttribute($value)
-    {
-        $this->attributes['title'] = $value;
+        return $this->title . '-' . $this->description;
     }
 
 }

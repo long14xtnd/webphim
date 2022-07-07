@@ -30,8 +30,8 @@
     <meta property="og:image" content=""/>
     <meta property="og:image:width" content="300"/>
     <meta property="og:image:height" content="55"/>
-    <meta property="fb:app_id" content="1430225714079442" />
-    <meta property="fb:admins" content="100011387450663"/>
+{{--    <meta property="fb:app_id" content="1430225714079442" />--}}
+{{--    <meta property="fb:admins" content="100011387450663"/>--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
     <link rel='dns-prefetch' href='//s.w.org'/>
@@ -57,6 +57,9 @@
 </head>
 
 <body class="home blog halimthemes halimmovies" data-masonry="">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0" nonce="ipmd4fs1"></script>
+
 <header id="header">
     <div class="container">
         <div class="row" id="headwrap">
@@ -67,15 +70,30 @@
             <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
                 <div class="header-nav">
                     <div class="col-xs-12">
-                        <form id="search-form-pc" name="halimForm" role="search" action="" method="GET">
-                            <div class="form-group">
-                                <div class="input-group col-xs-12">
-                                    <input id="search" type="text" name="s" class="form-control"
-                                           placeholder="Tìm kiếm..." autocomplete="off" required>
-                                    <i class="animate-spin hl-spin4 hidden"></i>
-                                </div>
+                        <style type="text/css">
+                            ul#result {
+                                position: absolute;
+                                z-index: 9999;
+                                background: #1b2d3c;
+                                width: 94%;
+                                padding: 10px;
+                                margin: 1px;
+                            }
+                        </style>
+{{--                        <form id="search-form-pc" name="halimForm" role="search" action="" method="GET">--}}
+                        <div class="form-group form-timkiem">
+                            <div class="input-group col-xs-12">
+                                <form action="{{route('tim-kiem')}}" method="GET">
+                                    <input type="text" name="search" id="timkiem" class="form-control" placeholder="Tìm kiếm phim..." autocomplete="off">
+                                    <button class="btn btn-primary">Tìm kiếm</button>
+                                </form>
                             </div>
-                        </form>
+
+                        </div>
+                        <ul class="list-group" id="result" style="display: none">
+
+                        </ul>
+{{--                        </form>--}}
                         <ul class="ui-autocomplete ajax-results hidden"></ul>
                     </div>
                 </div>
@@ -208,14 +226,15 @@
 <div id='easy-top'></div>
 
 <!-- Facebook JavaScript SDK -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1430225714079442";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+{{--<div id="fb-root"></div>--}}
+{{--<script>(function(d, s, id) {--}}
+{{--        var js, fjs = d.getElementsByTagName(s)[0];--}}
+{{--        if (d.getElementById(id)) return;--}}
+{{--        js = d.createElement(s); js.id = id;--}}
+{{--        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1430225714079442";--}}
+{{--        fjs.parentNode.insertBefore(js, fjs);--}}
+{{--    }(document, 'script', 'facebook-jssdk'));</script>--}}
+
 <!-- End Facebook JavaScript SDK -->
 <script type='text/javascript' src='{{ url('public/js/bootstrap.min.js?ver=5.7.2') }}' id='bootstrap-js'></script>
 <script type='text/javascript' src='{{ url('public/js/owl.carousel.min.js?ver=5.7.2') }}' id='carousel-js'>
@@ -436,7 +455,44 @@
         $('html,body').animate({scrollTop: $(aid).offset().top}, 'slow');
     });
 </script>
+{{--Tìm kiếm phim --}}
+<?php $baseUrl = URL::to('/'); ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#timkiem').keyup(function(){
+            $('#result').html('');
+            var search = $('#timkiem').val();
+            if(search!=''){
+                $('#result').css('display','inherit');
+                var expression = new RegExp(search, "i");
+                $.getJSON("<?php echo $baseUrl; ?>/public/json/movies.json",function(data){
+                    $.each(data, function(key, value){
+                        if (value.title.search(expression) != -1){
+                            var slug = value.slug
+                            var id = value.id
+                            console.log(slug,id)
+                            $('#result').append('<li class="list-group-item" style="cursor:pointer"><a href="/webphim/phim/' + value.slug + '.m' + value.id + '.html' + '"><img height="40" width="40" src="<?php echo $baseUrl; ?>/public/uploads/movie/'+value.image+'"">'+value.title+'</a><br/> | <span>'+value.description+'</span></li>');
+                        }
+                    });
+                })
+            }else{
+                $('#result').css('display','none');
+            }
+        })
 
+
+
+        $('#result').on('click', 'li', function() {
+            var click_text = $(this).text().split('|');
+
+            $('#timkiem').val($.trim(click_text[0]));
+
+            $("#result").html('');
+            $('#result').css('display','none');
+        });
+
+    })
+</script>
 </body>
 
 </html>

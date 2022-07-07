@@ -32,6 +32,7 @@ Route::get('/phim/{slug}.m{id}.html', [IndexController::class, 'movie'])->name('
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Route::get('/nam/{year}', [IndexController::class, 'year']);
 Route::get('/tag/{tag}', [IndexController::class, 'tag']);
+Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -51,3 +52,6 @@ Route::get('/hailongdev', [LongController::class, 'hailongdev']);
 Route::get('/update-year-phim', [MovieController::class, 'update_year_phim']);
 Route::get('/update-topview-phim', [MovieController::class, 'update_topview_phim']);
 Route::get('/update-season-phim', [MovieController::class, 'update_season']);
+
+
+Route::get('/post/{id}', [MovieController::class, 'test_post']);

@@ -44,6 +44,14 @@
 
 
                         </div>
+                            <div class="form-group">
+                                {!! Form::label('sotap', 'Số tập');!!}
+                                {!! Form::text('sotap', isset($movie) ? $movie->sotap : '', ['class' =>
+                                'form-control','placeholder'=>'Nhập vào dữ
+                                liệu...']);!!}
+
+
+                            </div>
                         <div class="form-group">
                             {!! Form::label('thoiluong', 'Thời lượng phim');!!}
                             {!! Form::text('thoiluong', isset($movie) ? $movie->thoiluong : '', ['class' =>
@@ -105,11 +113,18 @@
                             :'', ['class' =>  'form-control']);!!}
 
                         </div>
-                        <div class="form-group">
-                            {!! Form::label('genre', 'Genre');!!}
-                            {!! Form::select('genre_id', $genre,isset($movie)?$movie->genre_id
-                            :'', ['class' =>    'form-control']);!!}
 
+                        <div class="form-group">
+                            {!! Form::label('Genre', 'Thể loại', []) !!}<br>
+                            {{-- {!! Form::select('genre_id', $genre, isset($movie) ? $movie->genre_id : '', ['class'=>'form-control']) !!} --}}
+                            @foreach($list_genre as $key => $gen)
+                                @if(isset($movie))
+                                    {!! Form::checkbox('genre[]',$gen->id, isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false)  !!}
+                                @else
+                                    {!! Form::checkbox('genre[]',$gen->id, '')  !!}
+                                @endif
+                                {!! Form::label('genre', $gen->title) !!}
+                            @endforeach
                         </div>
                         <div class="form-group">
                             {!! Form::label('phim_hot', 'Phim Hot');!!}

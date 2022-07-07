@@ -2,6 +2,62 @@
     <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
         <div class="section-bar clearfix">
             <div class="section-title">
+                <span>Phim sắp chiếu</span>
+
+            </div>
+        </div>
+        {{--                Sidebar trending --}}
+        <section class="tab-content">
+            <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
+                <div class="halim-ajax-popular-post-loading hidden"></div>
+                <div id="halim-ajax-popular-post" class="popular-post">
+
+                    @foreach($movie_trailer as $key=>$mov_trailer)
+                        <div class="item post-37176">
+                            <a href="{{ route('movie',['slug'=>$mov_trailer->slug,'id'=>$mov_trailer->id]) }}"
+                               title="{{ $mov_trailer->title }}">
+                                <div class="item-link">
+                                    <img
+                                        src="{{ asset('public/uploads/movie/'.$mov_trailer->image) }}"
+                                        class="lazy post-thumb" alt="{{ $mov_trailer->title }}"
+                                        title="{{ $mov_trailer->title }}"/>
+                                    <span class="is_trailer">
+                                         @if ($mov_trailer->resolution==0)
+                                            HD
+                                        @elseif($mov_trailer->resolution==1)
+                                            SD
+                                        @elseif($mov_trailer->resolution==2)
+                                            CAM
+                                        @elseif($mov_trailer->resolution==3)
+                                            HDCam
+                                        @elseif($mov_trailer->resolution==4)
+                                            FullHD
+                                        @else
+                                            Trailer
+                                        @endif
+                                    </span>
+                                </div>
+                                <p class="title">{{ $mov_trailer->title }}</p>
+                            </a>
+                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div style="float: left;">
+                                <span class="user-rate-image post-large-rate stars-large-vang"
+                                      style="display: block;/* width: 100%; */">
+                                    <span style="width: 0%"></span>
+                                </span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+
+        {{--end sidebar trending--}}
+    </div>
+    <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
+        <div class="section-bar clearfix">
+            <div class="section-title">
                 <span>Trending</span>
 
             </div>
@@ -139,61 +195,6 @@
 
         {{--end sidebar trending--}}
     </div>
-    <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
-        <div class="section-bar clearfix">
-            <div class="section-title">
-                <span>Phim sắp chiếu</span>
 
-            </div>
-        </div>
-        {{--                Sidebar trending --}}
-        <section class="tab-content">
-            <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                <div class="halim-ajax-popular-post-loading hidden"></div>
-                <div id="halim-ajax-popular-post" class="popular-post">
-
-                    @foreach($movie_trailer as $key=>$mov_trailer)
-                        <div class="item post-37176">
-                            <a href="{{ route('movie',['slug'=>$mov_trailer->slug,'id'=>$mov_trailer->id]) }}"
-                               title="{{ $mov_trailer->title }}">
-                                <div class="item-link">
-                                    <img
-                                        src="{{ asset('public/uploads/movie/'.$mov_trailer->image) }}"
-                                        class="lazy post-thumb" alt="{{ $mov_trailer->title }}"
-                                        title="{{ $mov_trailer->title }}"/>
-                                    <span class="is_trailer">
-                                         @if ($mov_trailer->resolution==0)
-                                            HD
-                                        @elseif($mov_trailer->resolution==1)
-                                            SD
-                                        @elseif($mov_trailer->resolution==2)
-                                            CAM
-                                        @elseif($mov_trailer->resolution==3)
-                                            HDCam
-                                        @elseif($mov_trailer->resolution==4)
-                                            FullHD
-                                        @else
-                                            Trailer
-                                        @endif
-                                    </span>
-                                </div>
-                                <p class="title">{{ $mov_trailer->title }}</p>
-                            </a>
-                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                            <div style="float: left;">
-                                <span class="user-rate-image post-large-rate stars-large-vang"
-                                      style="display: block;/* width: 100%; */">
-                                    <span style="width: 0%"></span>
-                                </span>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-
-
-        {{--end sidebar trending--}}
-    </div>
 </aside>
 

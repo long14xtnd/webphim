@@ -54,13 +54,13 @@
                                             @if($mov->season!=0)
                                                 Việt Sub - Season {{ $mov->season }}
                                             @else
-                                                Việt Sub
+                                                Việt Sub- Tập {{ $mov->sotap }}/{{ $mov->sotap }}
                                             @endif
                                         @else
                                             @if($mov->season!=0)
                                                 Thuyết minh - Season {{ $mov->season }}
                                             @else
-                                                Thuyết minh
+                                                Thuyết minh - Tập {{ $mov->sotap }}/{{ $mov->sotap }}
                                             @endif
                                         @endif
                                     </span>
